@@ -115,7 +115,8 @@ const char *words[] = {
 "CORTISOL",
 "COQUEIRO",
 "PROGRAMADOR",
-"ELETRONICA"
+"ELETRONICA", 
+
 };
 
 #define WORD_COUNT (sizeof(words)/sizeof(words[0]))
@@ -187,12 +188,14 @@ static void lcd_set_cursor(uint8_t col, uint8_t row)
 {
 uint8_t addr = (row == 0) ? 0x00 : 0x40;
 lcd_command(0x80 | (addr + col));
+vTaskDelay(pdMS_TO_TICKS(200));
 }
 
 static void lcd_print(const char *text)
 {
 while(*text)
 lcd_data(*text++);
+vTaskDelay(pdMS_TO_TICKS(200));
 }
 
 static void lcd_init(void)
